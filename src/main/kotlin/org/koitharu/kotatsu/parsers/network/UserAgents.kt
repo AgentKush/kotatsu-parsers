@@ -3,10 +3,10 @@ package org.koitharu.kotatsu.parsers.network
 public object UserAgents {
 
 	public const val CHROME_MOBILE: String =
-		"Mozilla/5.0 (Linux; Android 16; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Mobile Safari/537.36"
+		"Mozilla/5.0 (Linux; Android 16) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Mobile Safari/537.36"
 
 	public const val FIREFOX_MOBILE: String =
-		"Mozilla/5.0 (Android 16; Mobile; rv:146.0) Gecko/146.0 Firefox/146.0"
+		"Mozilla/5.0 (Android 16; Mobile; LG-M255; rv:146.0) Gecko/146.0 Firefox/146.0"
 
 	public const val CHROME_DESKTOP: String =
 		"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.7444.59 Safari/537.36"

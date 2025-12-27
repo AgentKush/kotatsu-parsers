@@ -12,13 +12,18 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.ceil
 
-@Broken("Refactor + Need some tests")
+@Broken("Need to re-write this parser to handle all")
 @MangaSourceParser("WEEBDEX", "WeebDex")
 internal class WeebDex(context: MangaLoaderContext) :
 	PagedMangaParser(context, MangaParserSource.WEEBDEX, pageSize = 24) {
 
 	override val configKeyDomain = ConfigKey.Domain("weebdex.org")
 	private val apiUrl = "https://api.weebdex.org"
+
+	override fun getRequestHeaders() = super.getRequestHeaders().newBuilder()
+		.add("Origin", "https://$domain")
+		.add("Referer", "https://$domain/")
+		.build()
 
 	override val availableSortOrders: Set<SortOrder> = EnumSet.of(
 		SortOrder.UPDATED,
@@ -30,7 +35,9 @@ internal class WeebDex(context: MangaLoaderContext) :
 	override val filterCapabilities: MangaListFilterCapabilities
 		get() = MangaListFilterCapabilities(
 			isSearchSupported = true,
-			isSearchWithFiltersSupported = true
+			isSearchWithFiltersSupported = true,
+			isMultipleTagsSupported = true,
+			isOriginalLocaleSupported = true,
 		)
 
 	override suspend fun getFilterOptions(): MangaListFilterOptions {

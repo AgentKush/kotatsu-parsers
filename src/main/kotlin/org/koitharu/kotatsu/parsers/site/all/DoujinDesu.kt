@@ -163,7 +163,8 @@ internal class DoujinDesu(context: MangaLoaderContext) :
 	}
 
 	override suspend fun getPages(chapter: MangaChapter): List<MangaPage> {
-		val doc = webClient.httpGet(chapter.url.toAbsoluteUrl(domain)).parseHtml()
+		val chapterUrl = chapter.url.toAbsoluteUrl(domain)
+		val doc = webClient.httpGet(chapterUrl).parseHtml()
 		val chapterId = doc.selectFirst("#reader")?.attr("data-id")
 			?: throw IllegalStateException("Chapter ID not found")
 
@@ -171,9 +172,15 @@ internal class DoujinDesu(context: MangaLoaderContext) :
 			.add("id", chapterId)
 			.build()
 
+		val headers = okhttp3.Headers.Builder()
+			.add("Referer", chapterUrl)
+			.add("X-Requested-With", "XMLHttpRequest")
+			.build()
+
 		val response = webClient.httpPost(
 			"https://$domain/themes/ajax/ch.php",
 			body,
+			headers,
 		).parseHtml()
 
 		return response.select("img").map { img ->

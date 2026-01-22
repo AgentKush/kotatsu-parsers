@@ -157,32 +157,46 @@ internal class Mangakakalot(context: MangaLoaderContext) : PagedMangaParser(cont
 	}
 
 	private suspend fun fetchChaptersFromApi(slug: String): List<MangaChapter> {
-		val apiUrl = "https://$domain/api/manga/$slug/chapters"
-		val response = webClient.httpGet(apiUrl).parseJson()
+		val allChapters = mutableListOf<MangaChapter>()
+		val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
+		var offset = 0
+		val limit = 50
 
-		if (!response.optBoolean("success", false)) {
-			return emptyList()
+		while (true) {
+			val apiUrl = "https://$domain/api/manga/$slug/chapters?offset=$offset&limit=$limit"
+			val response = webClient.httpGet(apiUrl).parseJson()
+
+			if (!response.optBoolean("success", false)) {
+				break
+			}
+
+			val data = response.getJSONObject("data")
+			val chaptersArray = data.getJSONArray("chapters")
+
+			chaptersArray.mapJSON { obj ->
+				val chapterSlug = obj.getString("chapter_slug")
+				val url = "/manga/$slug/$chapterSlug"
+				MangaChapter(
+					id = generateUid(url),
+					title = obj.getString("chapter_name"),
+					number = obj.optDouble("chapter_num", 0.0).toFloat(),
+					volume = 0,
+					url = url,
+					uploadDate = dateFormat.parseSafe(obj.optString("updated_at")),
+					source = source,
+					scanlator = null,
+					branch = null,
+				)
+			}.let { allChapters.addAll(it) }
+
+			val pagination = data.optJSONObject("pagination")
+			if (pagination == null || !pagination.optBoolean("has_more", false)) {
+				break
+			}
+			offset += limit
 		}
 
-		val data = response.getJSONObject("data")
-		val chaptersArray = data.getJSONArray("chapters")
-		val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
-
-		return chaptersArray.mapJSON { obj ->
-			val chapterSlug = obj.getString("chapter_slug")
-			val url = "/manga/$slug/$chapterSlug"
-			MangaChapter(
-				id = generateUid(url),
-				title = obj.getString("chapter_name"),
-				number = obj.optDouble("chapter_num", 0.0).toFloat(),
-				volume = 0,
-				url = url,
-				uploadDate = dateFormat.parseSafe(obj.optString("updated_at")),
-				source = source,
-				scanlator = null,
-				branch = null,
-			)
-		}.sortedByDescending { it.number }
+		return allChapters.sortedByDescending { it.number }
 	}
 
 	override suspend fun getPages(chapter: MangaChapter): List<MangaPage> {

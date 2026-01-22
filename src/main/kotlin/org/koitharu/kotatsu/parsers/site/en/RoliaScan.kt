@@ -134,7 +134,7 @@ internal class RoliaScan(context: MangaLoaderContext) : PagedMangaParser(context
         val baseChapterListUrl = mangaUrl.toAbsoluteUrl(domain).removeSuffix("/") + "/chapterlist/"
         
         while (true) {
-            val url = if (page == 1) baseChapterListUrl else "$baseChapterListUrl?page=$page"
+            val url = if (page == 1) baseChapterListUrl else "$baseChapterListUrl?chap_page=$page"
             val chapterDoc = webClient.httpGet(url).parseHtml()
             val pageChapters = chapterDoc.select("a.seenchapter")
             
@@ -157,8 +157,8 @@ internal class RoliaScan(context: MangaLoaderContext) : PagedMangaParser(context
                 )
             }
             
-            // Check if there's a next page
-            val hasNextPage = chapterDoc.selectFirst("a.page-link:contains(Next), a[rel=next]") != null
+            // Check if there's a next page - look for pagination links
+            val hasNextPage = chapterDoc.selectFirst("a.page-link:contains(Next), a[rel=next], a[href*='chap_page=${page + 1}']") != null
             if (!hasNextPage) break
             
             page++

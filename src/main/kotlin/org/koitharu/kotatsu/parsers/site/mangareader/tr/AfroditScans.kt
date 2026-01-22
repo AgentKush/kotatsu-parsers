@@ -6,7 +6,7 @@ import org.koitharu.kotatsu.parsers.model.MangaListFilterCapabilities
 import org.koitharu.kotatsu.parsers.model.MangaParserSource
 import org.koitharu.kotatsu.parsers.site.mangareader.MangaReaderParser
 
-@MangaSourceParser("AFRODITSCANS", "Afrodit Scans", "tr")
+@MangaSourceParser("AFRODITSCANS", "AfroditScans", "tr")
 internal class AfroditScans(context: MangaLoaderContext) :
 	MangaReaderParser(context, MangaParserSource.AFRODITSCANS, "afroditscans.com", pageSize = 20, searchPageSize = 10) {
 	override val datePattern = "MMM d, yyyy"

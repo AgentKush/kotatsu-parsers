@@ -1,6 +1,6 @@
 package org.koitharu.kotatsu.parsers.site.all
 
-import okhttp3.FormBody
+import okhttp3.Headers
 import org.koitharu.kotatsu.parsers.MangaLoaderContext
 import org.koitharu.kotatsu.parsers.MangaSourceParser
 import org.koitharu.kotatsu.parsers.config.ConfigKey
@@ -168,18 +168,16 @@ internal class DoujinDesu(context: MangaLoaderContext) :
 		val chapterId = doc.selectFirst("#reader")?.attr("data-id")
 			?: throw IllegalStateException("Chapter ID not found")
 
-		val body = FormBody.Builder()
-			.add("id", chapterId)
-			.build()
+		val form = mapOf("id" to chapterId)
 
-		val headers = okhttp3.Headers.Builder()
+		val headers = Headers.Builder()
 			.add("Referer", chapterUrl)
 			.add("X-Requested-With", "XMLHttpRequest")
 			.build()
 
 		val response = webClient.httpPost(
 			"https://$domain/themes/ajax/ch.php",
-			body,
+			form,
 			headers,
 		).parseHtml()
 

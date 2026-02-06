@@ -214,12 +214,12 @@ internal class LxManga(context: MangaLoaderContext) : PagedMangaParser(context, 
 				) {
 					MangaPage(
 						id = generateUid(url),
-						url = "$CHAPTER_FRAGMENT$url",
+						url = CHAPTER_FRAGMENT + url,
 						preview = null,
 						source = source,
 					)
 				} else {
-					throw Exception("Bạn cần phải nạp LXCoin mua code VIP để xem nội dung này trên trang Web!")
+					throw IllegalArgumentException("Bạn cần nạp LXCoin để xem nội dung này trên trang Web!")
 				}
 			}
 	}
@@ -228,21 +228,18 @@ internal class LxManga(context: MangaLoaderContext) : PagedMangaParser(context, 
 		val request = chain.request()
 		val url = request.url.toString()
 
-		val headers = if (url.startsWith(CHAPTER_FRAGMENT)) {
-			request.headers.newBuilder()
-				.add("Origin", "https://$domain")
-				.add("Token", TOKEN_KEY)
+		return if (url.startsWith(CHAPTER_FRAGMENT)) {
+			val realUrl = url.removePrefix(CHAPTER_FRAGMENT).toHttpUrl()
+			val newRequest = request.newBuilder()
+				.url(realUrl)
+				.header("Origin", "https://$domain")
+				.header("Token", TOKEN_KEY)
 				.build()
+
+			chain.proceed(newRequest)
 		} else {
-			request.headers
+			chain.proceed(request)
 		}
-
-		val newRequest = request.newBuilder()
-			.url(url.substringAfter(CHAPTER_FRAGMENT).toHttpUrl())
-			.headers(headers)
-			.build()
-
-		return chain.proceed(newRequest)
 	}
 
 	private suspend fun availableTags(): Set<MangaTag> {
@@ -260,7 +257,7 @@ internal class LxManga(context: MangaLoaderContext) : PagedMangaParser(context, 
 	}
 
 	private companion object {
-		const val CHAPTER_FRAGMENT = "chapterImgUrl="
+		const val CHAPTER_FRAGMENT = "image://"
 		const val TOKEN_KEY = "364b9dccc5ef526587f108c4d4fd63ee35286e19e36ec55b93bd4d79410dbbf6"
 	}
 }

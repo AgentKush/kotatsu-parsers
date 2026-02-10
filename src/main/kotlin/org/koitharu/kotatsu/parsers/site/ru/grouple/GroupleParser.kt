@@ -119,7 +119,12 @@ internal abstract class GroupleParser(
             selectFirst("div.leftContent") ?: this
         }
         val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.US)
-        val coverImg = root.selectFirst("div.subject-cover")?.selectFirst("img")
+        val isNewLayout = root.selectFirst("div.cr-hero") != null
+        val coverImg = if (isNewLayout) {
+            null
+        } else {
+            root.selectFirst("div.subject-cover")?.selectFirst("img")
+        }
         val translations = if (config[splitTranslationsKey]) {
             root.selectFirst("div.translator-selection")
                 ?.select(".translator-selection-item")
@@ -145,30 +150,71 @@ internal abstract class GroupleParser(
         return manga.copy(
             source = newSource,
             title = doc.metaValue("name") ?: manga.title,
-            altTitles = root.selectFirst(".all-names-popover")?.select(".name")?.mapNotNullToSet {
-                it.textOrNull()
-            } ?: manga.altTitles,
+            altTitles = if (isNewLayout) {
+                doc.getElementById("alt-names-dialog")?.select(".modal-body div")?.mapNotNullToSet {
+                    it.textOrNull()
+                } ?: root.selectFirst("h3.cr-hero-names__alt")?.select("span")?.mapNotNullToSet {
+                    it.textOrNull()
+                } ?: manga.altTitles
+            } else {
+                root.selectFirst(".all-names-popover")?.select(".name")?.mapNotNullToSet {
+                    it.textOrNull()
+                } ?: manga.altTitles
+            },
             publicUrl = response.request.url.toString(),
-            description = root.selectFirst("div.manga-description")?.html(),
-            largeCoverUrl = coverImg?.attrAsAbsoluteUrlOrNull("data-full"),
-            coverUrl = manga.coverUrl
-                ?: coverImg?.attrAsAbsoluteUrlOrNull("data-thumb")?.replace("_p.", "."),
-            tags = root.selectFirstOrThrow("div.subject-meta")
-                .getElementsByAttributeValueContaining("href", "/list/genre/").mapTo(manga.tags.toMutableSet()) { a ->
-                    MangaTag(
-                        title = a.text().toTitleCase(),
-                        key = a.attr("href").removeSuffix('/').substringAfterLast('/'),
-                        source = source,
-                    )
-                },
+            description = if (isNewLayout) {
+                root.selectFirst("div.cr-description__content")?.html()
+            } else {
+                root.selectFirst("div.manga-description")?.html()
+            },
+            largeCoverUrl = if (isNewLayout) {
+                root.selectFirst("div.cr-hero-overlay__bg")?.attrAsAbsoluteUrlOrNull("data-bg")
+            } else {
+                coverImg?.attrAsAbsoluteUrlOrNull("data-full")
+            },
+            coverUrl = if (isNewLayout) {
+                manga.coverUrl
+                    ?: root.selectFirst("img.cr-hero-poster__img")?.attrAsAbsoluteUrlOrNull("src")
+            } else {
+                manga.coverUrl
+                    ?: coverImg?.attrAsAbsoluteUrlOrNull("data-thumb")?.replace("_p.", ".")
+            },
+            tags = if (isNewLayout) {
+                root.select("div.cr-tags a.cr-tags__item")
+                    .filter { it.attr("href").contains("/list/genre/") }
+                    .mapTo(manga.tags.toMutableSet()) { a ->
+                        MangaTag(
+                            title = a.text().toTitleCase(),
+                            key = a.attr("href").removeSuffix('/').substringAfterLast('/'),
+                            source = source,
+                        )
+                    }
+            } else {
+                root.selectFirstOrThrow("div.subject-meta")
+                    .getElementsByAttributeValueContaining("href", "/list/genre/")
+                    .mapTo(manga.tags.toMutableSet()) { a ->
+                        MangaTag(
+                            title = a.text().toTitleCase(),
+                            key = a.attr("href").removeSuffix('/').substringAfterLast('/'),
+                            source = source,
+                        )
+                    }
+            },
             state = if (isRestricted) {
                 MangaState.RESTRICTED
+            } else if (isNewLayout) {
+                parseNewLayoutState(root) ?: manga.state
             } else {
                 manga.state
             },
-            authors = root.select(".elem_author,.elem_illustrator,.elem_screenwriter")
-                .select("a.person-link")
-                .mapNotNullToSet { it.textOrNull() } + manga.authors,
+            authors = if (isNewLayout) {
+                root.select("div.cr-main-person-item__name a")
+                    .mapNotNullToSet { it.textOrNull() } + manga.authors
+            } else {
+                root.select(".elem_author,.elem_illustrator,.elem_screenwriter")
+                    .select("a.person-link")
+                    .mapNotNullToSet { it.textOrNull() } + manga.authors
+            },
             contentRating = (if (hasNsfwAlert) ContentRating.SUGGESTIVE else ContentRating.SAFE)
                 .coerceAtLeast(manga.contentRating ?: ContentRating.SAFE),
             chapters = chaptersList?.select("a.chapter-link")
@@ -216,6 +262,26 @@ internal abstract class GroupleParser(
                     }
                 }.orEmpty(),
         )
+    }
+
+    private fun parseNewLayoutState(root: Element): MangaState? {
+        val items = root.select("div.cr-info-details__item")
+        for (item in items) {
+            val title = item.selectFirst("div.cr-info-details__title")?.text() ?: continue
+            if (title.contains("Выпуск", ignoreCase = true)) {
+                val content = item.selectFirst("div.cr-info-details__content")?.text().orEmpty()
+                return when {
+                    content.contains("Продолжается", ignoreCase = true) -> MangaState.ONGOING
+                    content.contains("Завершен", ignoreCase = true) -> MangaState.FINISHED
+                    content.contains("Закончен", ignoreCase = true) -> MangaState.FINISHED
+                    content.contains("Заброшен", ignoreCase = true) -> MangaState.ABANDONED
+                    content.contains("Приостановлен", ignoreCase = true) -> MangaState.PAUSED
+                    content.contains("Анонс", ignoreCase = true) -> MangaState.UPCOMING
+                    else -> null
+                }
+            }
+        }
+        return null
     }
 
     override suspend fun getPages(chapter: MangaChapter): List<MangaPage> {

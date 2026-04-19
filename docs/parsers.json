@@ -1,21 +1,21 @@
 {
   "generated_by": "docs/build_catalog.py",
-  "total": 1187,
-  "broken": 375,
+  "total": 1176,
+  "broken": 366,
   "by_type": {
-    "HENTAI": 254,
-    "MANGA": 922,
+    "HENTAI": 255,
+    "MANGA": 910,
     "COMICS": 11
   },
   "by_locale": {
-    "en": 363,
+    "en": 359,
     "fr": 101,
-    "ar": 61,
-    "pt": 139,
+    "ar": 58,
+    "pt": 140,
     "ru": 18,
-    "tr": 120,
+    "tr": 117,
     "id": 117,
-    "es": 116,
+    "es": 114,
     "be": 1,
     "th": 30,
     "zh": 9,
@@ -219,16 +219,6 @@
       "broken": false,
       "broken_reason": "",
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/pt/AloneScanlator.kt"
-    },
-    {
-      "name": "ALTAYSCANS",
-      "title": "AltayScans",
-      "locale": "en",
-      "type": "MANGA",
-      "domain": "altayscans.com",
-      "broken": true,
-      "broken_reason": "Original site closed",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/en/AltayScans.kt"
     },
     {
       "name": "ALTERKAISCANS",
@@ -439,16 +429,6 @@
       "broken": false,
       "broken_reason": "",
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/ar/ArabToons.kt"
-    },
-    {
-      "name": "ARAREASCANS",
-      "title": "ArAreaScans",
-      "locale": "ar",
-      "type": "MANGA",
-      "domain": "ar.kenmanga.com",
-      "broken": false,
-      "broken_reason": "",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/ar/ArAreaScans.kt"
     },
     {
       "name": "ARAZNOVEL",
@@ -1166,9 +1146,9 @@
       "locale": "es",
       "type": "MANGA",
       "domain": "legionscans.com",
-      "broken": true,
-      "broken_reason": "Not dead, changed template",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/heancmsalt/es/CerberuSeries.kt"
+      "broken": false,
+      "broken_reason": "",
+      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/es/CerberuSeries.kt"
     },
     {
       "name": "CERISE_SCANS",
@@ -1309,6 +1289,16 @@
       "broken": false,
       "broken_reason": "",
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/id/Comicaso.kt"
+    },
+    {
+      "name": "COMICAZEN",
+      "title": "Comicazen",
+      "locale": "id",
+      "type": "MANGA",
+      "domain": "comicazen.com",
+      "broken": false,
+      "broken_reason": "",
+      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/id/Comicazen.kt"
     },
     {
       "name": "COMICEXTRA",
@@ -2169,6 +2159,16 @@
       "broken": false,
       "broken_reason": "",
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/en/FactManga.kt"
+    },
+    {
+      "name": "TENKAISCAN",
+      "title": "FalcoScan",
+      "locale": "es",
+      "type": "HENTAI",
+      "domain": "falcoscan.net",
+      "broken": false,
+      "broken_reason": "",
+      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/es/TenkaiScan.kt"
     },
     {
       "name": "FAYSCANS",
@@ -3141,16 +3141,6 @@
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/zeistmanga/ar/Hijala.kt"
     },
     {
-      "name": "HIJALACOM",
-      "title": "Hijalacom",
-      "locale": "ar",
-      "type": "MANGA",
-      "domain": "hijala.com",
-      "broken": false,
-      "broken_reason": "",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/ar/Hijalacom.kt"
-    },
-    {
       "name": "HIKARISCAN",
       "title": "HikariScan",
       "locale": "pt",
@@ -3266,9 +3256,9 @@
       "locale": "es",
       "type": "MANGA",
       "domain": "visormanga.com",
-      "broken": true,
-      "broken_reason": "Not dead, changed template",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/es/HouseMangas.kt"
+      "broken": false,
+      "broken_reason": "",
+      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/es/HouseMangasParser.kt"
     },
     {
       "name": "HOUSEOFOTAKUS",
@@ -3401,16 +3391,6 @@
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/es/InariManga.kt"
     },
     {
-      "name": "INARIPIKAV",
-      "title": "InariPikav",
-      "locale": "es",
-      "type": "MANGA",
-      "domain": "clubinari.org",
-      "broken": true,
-      "broken_reason": "",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/es/InariPikav.kt"
-    },
-    {
       "name": "INDO18H",
       "title": "Indo18h",
       "locale": "id",
@@ -3439,6 +3419,16 @@
       "broken": false,
       "broken_reason": "",
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/es/Infrafandub.kt"
+    },
+    {
+      "name": "INKAPK",
+      "title": "InkAPK",
+      "locale": "pt",
+      "type": "HENTAI",
+      "domain": "inkapk.net",
+      "broken": false,
+      "broken_reason": "",
+      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/pt/InkAPK.kt"
     },
     {
       "name": "MURIMSCAN",
@@ -3601,16 +3591,6 @@
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/onemanga/fr/KaijuNo8.kt"
     },
     {
-      "name": "KAISCANS",
-      "title": "KaiScans",
-      "locale": "en",
-      "type": "MANGA",
-      "domain": "luascans.com",
-      "broken": false,
-      "broken_reason": "",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/en/KaiScans.kt"
-    },
-    {
       "name": "KAKUSEIPROJECT",
       "title": "KakuseiProject",
       "locale": "pt",
@@ -3739,16 +3719,6 @@
       "broken": false,
       "broken_reason": "",
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/onemanga/fr/KingdomScan.kt"
-    },
-    {
-      "name": "FURYMANGA",
-      "title": "KingOfScans",
-      "locale": "en",
-      "type": "MANGA",
-      "domain": "myshojo.com",
-      "broken": false,
-      "broken_reason": "",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/en/FuryManga.kt"
     },
     {
       "name": "KIRYUU",
@@ -3909,16 +3879,6 @@
       "broken": false,
       "broken_reason": "",
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/id/KomikGo.kt"
-    },
-    {
-      "name": "KOMIKID",
-      "title": "KomikId",
-      "locale": "id",
-      "type": "MANGA",
-      "domain": "komiku.org",
-      "broken": true,
-      "broken_reason": "",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mmrcms/id/KomikId.kt"
     },
     {
       "name": "KOMIKINDO",
@@ -4451,16 +4411,6 @@
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/pt/LichMangas.kt"
     },
     {
-      "name": "LICHSUBS",
-      "title": "LichSubs",
-      "locale": "tr",
-      "type": "MANGA",
-      "domain": "www.kuroimanga.com",
-      "broken": true,
-      "broken_reason": "",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/tr/LichSubs.kt"
-    },
-    {
       "name": "LIKEMANGANET",
       "title": "Like-Manga.net",
       "locale": "ar",
@@ -4476,8 +4426,8 @@
       "locale": "en",
       "type": "MANGA",
       "domain": "likemanga.ink",
-      "broken": false,
-      "broken_reason": "",
+      "broken": true,
+      "broken_reason": "Blocked by Cloudflare",
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/likemanga/en/LikeManga.kt"
     },
     {
@@ -5661,6 +5611,16 @@
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangabox/en/Mangakakalot.kt"
     },
     {
+      "name": "MANGAKATANA",
+      "title": "MangaKatana",
+      "locale": "en",
+      "type": "MANGA",
+      "domain": "mangakatana.com",
+      "broken": false,
+      "broken_reason": "",
+      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/en/MangaKatana.kt"
+    },
+    {
       "name": "MANGAKAWAII_EN",
       "title": "MangaKawaii En",
       "locale": "en",
@@ -5851,16 +5811,6 @@
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/fr/MangaMana.kt"
     },
     {
-      "name": "MANGA_MANHUA",
-      "title": "MangaManhua",
-      "locale": "en",
-      "type": "MANGA",
-      "domain": "mangaonlineteam.com",
-      "broken": false,
-      "broken_reason": "",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/en/MangaManhua.kt"
-    },
-    {
       "name": "MANGAMANIACS",
       "title": "MangaManiacs",
       "locale": "en",
@@ -5949,16 +5899,6 @@
       "broken": false,
       "broken_reason": "",
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/pt/MangaNinja.kt"
-    },
-    {
-      "name": "MANGANOON",
-      "title": "MangaNoon",
-      "locale": "ar",
-      "type": "MANGA",
-      "domain": "vrnoin.site",
-      "broken": true,
-      "broken_reason": "",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/ar/MangaNoon.kt"
     },
     {
       "name": "MANGAOKU",
@@ -6085,7 +6025,7 @@
       "title": "MangaPark",
       "locale": "",
       "type": "MANGA",
-      "domain": "mangapark.io",
+      "domain": "mangapark.net",
       "broken": false,
       "broken_reason": "",
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/all/MangaPark.kt"
@@ -6199,16 +6139,6 @@
       "broken": false,
       "broken_reason": "",
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/en/MangaRock.kt"
-    },
-    {
-      "name": "MANGAROCKTEAM",
-      "title": "MangaRock.team",
-      "locale": "en",
-      "type": "MANGA",
-      "domain": "mangarockteam.com",
-      "broken": false,
-      "broken_reason": "",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/en/MangaRockTeam.kt"
     },
     {
       "name": "MANGAROLLS",
@@ -6631,16 +6561,6 @@
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/tr/Mangawt.kt"
     },
     {
-      "name": "MANGAWT_NET",
-      "title": "MangaWt.net",
-      "locale": "tr",
-      "type": "MANGA",
-      "domain": "mangawt.com",
-      "broken": false,
-      "broken_reason": "",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/tr/MangaWtNet.kt"
-    },
-    {
       "name": "MANGA_WTF",
       "title": "MangaWtf",
       "locale": "ru",
@@ -6996,8 +6916,8 @@
       "locale": "en",
       "type": "HENTAI",
       "domain": "manhwaclub.net",
-      "broken": true,
-      "broken_reason": "Check + refactor code needed",
+      "broken": false,
+      "broken_reason": "",
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/en/ManhwaClub.kt"
     },
     {
@@ -8201,6 +8121,16 @@
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/tr/NoxScans.kt"
     },
     {
+      "name": "NOXSUBS",
+      "title": "NoxSubs",
+      "locale": "tr",
+      "type": "MANGA",
+      "domain": "noxsubs.net",
+      "broken": false,
+      "broken_reason": "",
+      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/tr/NoxSubs.kt"
+    },
+    {
       "name": "NTRMANGA",
       "title": "NtrManga",
       "locale": "th",
@@ -8219,6 +8149,16 @@
       "broken": true,
       "broken_reason": "",
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/en/NvManga.kt"
+    },
+    {
+      "name": "NYRAXMANGA",
+      "title": "Nyraxmanga",
+      "locale": "en",
+      "type": "MANGA",
+      "domain": "nyraxmanga.com",
+      "broken": false,
+      "broken_reason": "",
+      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/en/Nyraxmanga.kt"
     },
     {
       "name": "NYXMANGA",
@@ -8389,16 +8329,6 @@
       "broken": true,
       "broken_reason": "",
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/id/Otsugami.kt"
-    },
-    {
-      "name": "PANCONCOLA",
-      "title": "Panconcola",
-      "locale": "es",
-      "type": "MANGA",
-      "domain": "artessupremas.com",
-      "broken": true,
-      "broken_reason": "",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/es/Panconcola.kt"
     },
     {
       "name": "PANTHEONSCAN",
@@ -9301,16 +9231,6 @@
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/en/RoliaScan.kt"
     },
     {
-      "name": "ROMANTIKMANGA",
-      "title": "RomantikManga",
-      "locale": "tr",
-      "type": "MANGA",
-      "domain": "webtoonhatti.club",
-      "broken": false,
-      "broken_reason": "",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/madara/tr/RomantikManga.kt"
-    },
-    {
       "name": "RUYAMANGA",
       "title": "RuyaManga",
       "locale": "tr",
@@ -9779,16 +9699,6 @@
       "broken": false,
       "broken_reason": "",
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/zeistmanga/id/ShiyuraSub.kt"
-    },
-    {
-      "name": "SHOJOSCANS",
-      "title": "ShojoScans",
-      "locale": "en",
-      "type": "MANGA",
-      "domain": "violetscans.com",
-      "broken": false,
-      "broken_reason": "",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/en/ShojoScans.kt"
     },
     {
       "name": "SHOOTINGSTARSCANS",
@@ -10281,16 +10191,6 @@
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/tr/TempestFansubNet.kt"
     },
     {
-      "name": "TEMPESTSCANS",
-      "title": "TempestScans",
-      "locale": "tr",
-      "type": "MANGA",
-      "domain": "adumanga.com",
-      "broken": false,
-      "broken_reason": "",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/tr/TempestScans.kt"
-    },
-    {
       "name": "TEMPLESCAN",
       "title": "TempleScan",
       "locale": "en",
@@ -10309,16 +10209,6 @@
       "broken": true,
       "broken_reason": "",
       "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/es/TempleScanEsp.kt"
-    },
-    {
-      "name": "TENKAISCAN",
-      "title": "TenkaiScan",
-      "locale": "es",
-      "type": "HENTAI",
-      "domain": "falcoscan.net",
-      "broken": true,
-      "broken_reason": "Not dead, changed template",
-      "file": "src/main/kotlin/org/koitharu/kotatsu/parsers/site/mangareader/es/TenkaiScan.kt"
     },
     {
       "name": "MASTERKOMIK",

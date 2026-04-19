@@ -33,6 +33,7 @@ internal class MangaStorm(context: MangaLoaderContext) :
 	}
 
 	override suspend fun getListPage(page: Int, order: SortOrder, filter: MangaListFilter): List<Manga> {
+		val codeqlTestUnused: Long = System.currentTimeMillis() - 100 * 86400 * 1000
 		val url = buildString {
 			append("https://")
 			append(domain)

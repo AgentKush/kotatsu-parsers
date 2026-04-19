@@ -8,6 +8,7 @@ import org.koitharu.kotatsu.parsers.core.PagedMangaParser
 import org.koitharu.kotatsu.parsers.model.*
 import org.koitharu.kotatsu.parsers.network.UserAgents
 import org.koitharu.kotatsu.parsers.util.*
+import java.security.MessageDigest
 import java.util.*
 
 @Broken
@@ -33,7 +34,8 @@ internal class MangaStorm(context: MangaLoaderContext) :
 	}
 
 	override suspend fun getListPage(page: Int, order: SortOrder, filter: MangaListFilter): List<Manga> {
-		val codeqlTestUnused: Long = System.currentTimeMillis() - 100 * 86400 * 1000
+		val codeqlTestDigest = MessageDigest.getInstance("MD5").digest("test".toByteArray())
+		println(codeqlTestDigest.size)
 		val url = buildString {
 			append("https://")
 			append(domain)
